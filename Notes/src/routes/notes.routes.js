@@ -9,6 +9,8 @@ import {
 
 const router = express.Router();
 
+// all routes prefixed by /notes
+
 router.get("/", getNotes);
 router.get("/:id", getNoteById);
 router.post("/", createNote);
