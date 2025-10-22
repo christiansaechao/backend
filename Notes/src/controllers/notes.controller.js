@@ -10,7 +10,7 @@ export const getNotes = async (req, res) => {
       });
     }
 
-    return res.json({ success: true, data: notes });
+    return res.send({ success: true, data: notes });
   } catch (err) {
     next(err);
   }
