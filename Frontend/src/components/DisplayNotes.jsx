@@ -26,7 +26,7 @@ export const DisplayNotes = () => {
         <h3>No notes to display</h3>
       ) : (
         notes.map((note, index) => (
-          <div key={note.title + index}>
+          <div key={note.title + index} className="p-4 border-2 border-white w-40">
             <h4>{note.title}</h4>
             <p>{note.content}</p>
           </div>

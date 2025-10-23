@@ -4,11 +4,12 @@ import { useUserStore } from "../store/useUserStore";
 // takes in url, data, config
 const api = axios.create({
   baseURL: "http://localhost:5000",
+  withCredentials: true
 });
 
 api.interceptors.request.use((config) => {
   const token = useUserStore.getState().accessToken;
-  console.log(token);
+
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

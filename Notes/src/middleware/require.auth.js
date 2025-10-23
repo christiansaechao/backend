@@ -2,6 +2,8 @@ import { verifyAccessToken } from "../lib/access.js";
 
 export const requireAuth = (req, res, next) => {
   const authHeader = req.headers.authorization;
+
+  // authorization: "Bearer sadlkfjasdfwigox43902pl;ksdafasdf"
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res
       .status(401)
@@ -12,7 +14,9 @@ export const requireAuth = (req, res, next) => {
 
   try {
     const payload = verifyAccessToken(token);
+    // we're adding a new property called user
     req.user = payload;
+    console.log("User has been verified")
     next();
   } catch (err) {
     next(err);

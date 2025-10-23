@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../../store/useUserStore";
 import api from "../../utils/api";
 
 export const Signup = () => {
+  const { setAuth } = useUserStore((state) => state);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,11 +44,16 @@ export const Signup = () => {
         password: password,
       };
 
-      const { data } = await api.post("/protected/signup", payload, options);
+      const { data } = await api.post("/auth/signup", payload, options);
 
       if (data.error) {
         setError(error);
         return;
+      }
+
+      if (data.success) {
+        setAuth(data.data, data.accessToken);
+        navigate("/notes");
       }
 
       navigate("/notes");

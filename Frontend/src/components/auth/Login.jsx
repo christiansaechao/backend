@@ -7,7 +7,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = useUserStore((state) => state);
+  const { setAuth } = useUserStore((state) => state);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ export const Login = () => {
 
       const { data } = await api.post("/auth/login", payload, options);
       if (data.success) {
-        setUser(data.data, data.accessToken);
+        setAuth(data.data, data.accessToken);
         navigate("/notes");
       }
 

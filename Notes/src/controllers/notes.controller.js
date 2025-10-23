@@ -1,8 +1,14 @@
 import prisma from "../prisma/client.js";
 
-export const getNotes = async (req, res) => {
+export const getNotes = async (req, res, next) => {
   try {
-    const notes = await prisma.note.findMany();
+    const { id } = req.user;
+    const notes = await prisma.note.findMany({
+      where: {
+        id: id
+      }
+    });
+    
     if (!notes.length) {
       return res.status(404).send({
         success: false,
@@ -16,7 +22,7 @@ export const getNotes = async (req, res) => {
   }
 };
 
-export const getNoteById = async (req, res) => {
+export const getNoteById = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (!id)
@@ -43,7 +49,7 @@ export const getNoteById = async (req, res) => {
   }
 };
 
-export const createNote = async (req, res) => {
+export const createNote = async (req, res, next) => {
   try {
     const { title, content } = req.body;
     const trimmedTitle = title.trim();
