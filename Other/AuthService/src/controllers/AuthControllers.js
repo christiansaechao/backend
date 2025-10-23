@@ -12,7 +12,7 @@ export const SignUp = async (req, res, next) => {
         .json({ success: false, error: "Email and Password are required" });
     }
 
-    const existingUser = await prisma.user.findUnique({ where: { email } });
+    const existingUser = await prisma.user.delete({ where: { email } });
 
     if (existingUser) {
       return res.status(409).json({

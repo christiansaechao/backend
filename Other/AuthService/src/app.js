@@ -11,6 +11,6 @@ App.get("/", (req, res) => {
   res.send({ msg: "Health check this is working correctly" });
 });
 
-App.use("/protected", AuthRoutes);
+App.use("/", AuthRoutes);
 
 export default App;

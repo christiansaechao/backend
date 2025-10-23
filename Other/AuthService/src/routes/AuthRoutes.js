@@ -3,10 +3,6 @@ import { Login, SignUp } from "../controllers/AuthControllers.js";
 
 const routes = express.Router();
 
-routes.get("/", (req, res) => {
-  res.json({ msg: "Testing the connection for the AuthRoutes" });
-});
-
 // signup routes
 routes.post("/sign-up", SignUp);
 
