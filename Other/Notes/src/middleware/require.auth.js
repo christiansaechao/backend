@@ -16,7 +16,6 @@ export const requireAuth = (req, res, next) => {
     const payload = verifyAccessToken(token);
     // we're adding a new property called user
     req.user = payload;
-    console.log("User has been verified")
     next();
   } catch (err) {
     next(err);
